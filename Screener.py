@@ -6,7 +6,7 @@ from tkinter import ttk
 def fetch_stock_data(ticker):
     try:
         stock = yf.Ticker(ticker)
-        data = stock.history(period="2d")# Fetch the last 2 days of data for price change
+        data = stock.history(period="2d")  # Fetch the last 2 days of data for price change
         price = data['Close'].iloc[-1]
         prev_close = data['Close'].iloc[-2]
         price_change = price - prev_close
@@ -20,12 +20,12 @@ def update_stock_data(tickers):
     for ticker, tile in tiles.items():
         price, price_change, percent_change = fetch_stock_data(ticker)
         if price is not None:
-           # Update the tile text with current price, price change, and percent change
+            # Update the tile text with current price, price change, and percent change
             tile['text'] = (f"{ticker}\n"
                             f"Price: ${price:.2f}\n"
                             f"Change: ${price_change:.2f}\n"
                             f"% Change: {percent_change:.2f}%")
-         # Change the tile background color based on price change
+            # Change the tile background color based on price change
             if price_change > 0:
                 tile.config(background="green")  # Stock price is up
             elif price_change < 0:
@@ -46,19 +46,24 @@ def create_stock_tiles(root, tickers):
 
     for ticker in tickers:
         frame = ttk.Frame(root, borderwidth=2, relief="groove", padding=(10, 10))
-        frame.grid(row=row, column=col, padx=10, pady=10)
-        
+        frame.grid(row=row, column=col, padx=10, pady=10, sticky="nsew")
+
         tile = ttk.Label(frame, text=f"{ticker}\nLoading...", font=("Arial", 12), justify="center")
-                        
-        tile.pack()
+        tile.pack(fill=tk.BOTH, expand=True)
 
         tiles[ticker] = tile
-        
+
         # Arrange tiles in a grid (e.g., 4 tiles per row)
         col += 1
         if col > 3:
             col = 0
             row += 1
+
+    # Configure grid rows and columns to expand proportionally
+    for i in range(row + 1):
+        root.grid_rowconfigure(i, weight=1)
+    for j in range(4):  # Assuming 4 columns
+        root.grid_columnconfigure(j, weight=1)
 
 # Define the list of stock tickers
 tickers = ["TQQQ", "SQQQ", "FNGU", "QUBT"]

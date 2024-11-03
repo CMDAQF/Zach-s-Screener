@@ -1,0 +1,9 @@
+Add tile adjustable size _ kinda Finished
+add add symbol
+add tile grouping
+add tile hyperlink to yahoo finance ticker page
+add Nasdaq, S&p, dow as small headers above all tiles
+DONE add refresh button to speed of price fetch time/ is ther a way to get faster ral time quotes? (finished just change from 5 sec to whatever)
+add previous adjusted close
+add % increase calculator 
+add % change calculator from one value to another value
