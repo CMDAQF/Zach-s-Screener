@@ -1,2 +1,2 @@
 # Zach-s-Screener
-Basic Stock screener for you desktop. Adding more functions later.
+Basic Stock screener for your desktop. Adding more functions later.
